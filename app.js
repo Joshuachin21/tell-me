@@ -52,8 +52,11 @@ console.log('watching');
 
         if (value === 1) {
             console.log('in');
-            if(google_home_itsy_bitsy_spider){
+            try{
                 google_home_itsy_bitsy_spider.stop();
+            }
+            catch(err){
+                console.log(err);
             }
             google_home_itsy_bitsy_spider.play();
         }
