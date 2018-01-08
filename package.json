@@ -1,0 +1,24 @@
+{
+  "name": "push-game",
+  "version": "1.0.0",
+  "description": "Raspberry Pi game that involves 2 teams that push buttons in a tug-of-war type battle where the collective count of button presses determines a winner.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joshuachin21/push-game.git"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "onoff": "^1.1.8"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Joshuachin21/push-game/issues"
+  },
+  "homepage": "https://github.com/Joshuachin21/push-game#readme"
+}

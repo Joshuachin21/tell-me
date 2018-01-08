@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <style type="text/css">
+        html, div, pre {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 40px;
+        }
+
+        .title-container {
+            height: 50px;
+        }
+
+        .start-btn {
+            height: 70px;
+            margin: 25px;
+        }
+
+        .replay-btn {
+            height: 30px;
+            width: 100px;
+            margin: 5px;
+        }
+
+        .replay-btn-container {
+            text-align: center;
+        }
+
+        .results {
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .countdown {
+            position: fixed;
+            top: 15%;
+            left: 10%;
+            z-index: 9999999;
+            width: 200px;
+            height: 200px;
+            font-size: 80px;
+            text-align: center;
+            /* Rotate div */
+            -ms-transform: rotate(90deg); /* IE 9 */
+            -webkit-transform: rotate(90deg); /* Safari 3-8 */
+            transform: rotate(90deg);
+            background: none;
+
+        }
+
+        .countdown2 {
+            position: fixed;
+            top: 15%;
+            right: 10%;
+            z-index: 9999999;
+            width: 200px;
+            height: 200px;
+            font-size: 80px;
+            text-align: center;
+            /* Rotate div */
+            -ms-transform: rotate(270deg); /* IE 9 */
+            -webkit-transform: rotate(270deg); /* Safari 3-8 */
+            transform: rotate(270deg);
+            background: none;
+
+        }
+
+        .score1 {
+            width: 50px;
+            font-size: 40px;
+            text-align: center;
+            /* Rotate div */
+            -ms-transform: rotate(90deg); /* IE 9 */
+            -webkit-transform: rotate(90deg); /* Safari 3-8 */
+            transform: rotate(90deg);
+        }
+
+        .score2 {
+            width: 50px;
+            font-size: 40px;
+            text-align: center;
+            /* Rotate div */
+            -ms-transform: rotate(90deg); /* IE 9 */
+            -webkit-transform: rotate(90deg); /* Safari 3-8 */
+            transform: rotate(270deg);
+        }
+
+        .score-container {
+            height: 120px;
+        }
+
+        .progress {
+            height: 100px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myCtrl" class="row" ng-init="init()">
+    <!--===========================================================TITLE======================================================TITLE-->
+    <div class="row title-container" ng-if="gameSettings.state == 'menu' || gameSettings.state == 'finished'">
+        <div class="col-xs-12">
+            <div class="col-xs-12 title">
+                Push Game
+            </div>
+            <div ng-if="gameSettings.state == 'finished'" class="col-xs-12">
+                <div class="text-center results">{{gameSettings.winner.name}} is the WINNER!</div>
+            </div>
+            <div ng-if="gameSettings.state == 'finished'" class="col-xs-12 replay-btn-container">
+                <button type="button" ng-click="startGame()" class="btn btn-success replay-btn">
+                    REPLAY!
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+
+            <!--===========================================================MENU===============================================MENU-->
+            <div ng-if="gameSettings.state == 'menu' && gameSettings.countDown !== 'Go!'" class="btn-group btn-group-justified col-xs-12" role="group" aria-label="...">
+                <div class="btn-group" role="group">
+                    <button type="button" ng-click="startGame()" class="btn btn-success replay-btn col-xs-12"
+                            id="start">
+                        START!
+                    </button>
+                </div>
+            </div>
+
+
+            <!--=========================================================COUNTDOWN===========================================COUNTDOWN-->
+            <div ng-if="gameSettings.state == 'starting' || gameSettings.state == 'play'">
+                <div class="countdown">{{gameSettings.countDown}}</div>
+            </div>
+            <div ng-if="gameSettings.state == 'starting' || gameSettings.state == 'play'">
+                <div class="countdown2">{{gameSettings.countDown}}</div>
+            </div>
+            <!--    <div ng-if="gameSettings.state == 'finished'" class="col-xs-12">
+                    <div class="col-xs-6 text-center">{{gameSettings.winner.name}} is the WINNER!</div>
+                </div>-->
+
+
+            <!--=========================================================PLAY=================================================PLAY-->
+            <div ng-if="(gameSettings.state == 'play' || gameSettings.state == 'finished')" class="col-xs-12">
+                <div class="score-container col-xs-5 text-center">
+                    <div class="score score1">&nbsp;</div>
+                </div>
+                <div class="score-container col-xs-1 text-center">
+                    <div class="score score1">{{gameSettings.p1score}}</div>
+                </div>
+
+                <div class="score-container col-xs-1 text-center">
+                    <div class="score score2">{{gameSettings.p2score}}</div>
+                </div>
+                <div class="score-container col-xs-5 text-center">
+                    <div class="score score2">&nbsp;</div>
+                </div>
+
+            </div>
+            <div ng-if="gameSettings.state == 'play' && gameSettings.countDown !== 'Go!' " class="col-xs-12">
+                <button class="col-xs-6 text-center" ng-click="p1button()">HIT!</button>
+                <button class="col-xs-6 text-center" ng-click="p2button()">HIT!</button>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="progress" ng-if="(gameSettings.state == 'play' || gameSettings.state == 'finished') && gameSettings.countDown !== 'Go!'">
+        <div class="progress-bar progress-bar-success" style="width: {{gameSettings.team1Progress}}%">
+            <span class="sr-only">35% Complete (success)</span>
+        </div>
+        <div class="progress-bar progress-bar-danger" style="width: {{gameSettings.team2Progress}}%">
+            <span class="sr-only">35% Complete (success)</span>
+        </div>
+
+    </div>
+    <!--
+        <pre>{{gameSettings | json}}</pre>-->
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+<!-- include socket.io client side script -->
+
+
+<script>
+
+
+    var socket = io(); //load socket.io-client and connect to the host that serves the page
+
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function ($scope, $rootScope) {
+        $scope.firstName = "John";
+        $scope.lastName = "Doe";
+        var gameSettings = {
+            state: 'menu',
+            timer: 30,
+            mode: 'short'
+        };
+        var setGameSettings = function (data) {
+            $scope.gameSettings = data;
+        };
+        $rootScope.gameSettings = gameSettings;
+        $scope.gameSettings = $rootScope.gameSettings;
+
+        console.log($scope.gameSettings);
+        $scope.gameSettings = gameSettings;
+
+
+        $scope.init = function () {
+
+            socket.emit("checkGame", $scope.gameSettings);
+
+        };
+
+
+        //LISTENERS
+
+
+        $scope.$on('gameUpdate', function (event, args) {
+            $scope.gameSettings = args;
+        });
+
+
+        socket.on('score', function (data) {
+            setTimeout(function () {
+                document.getElementById("score").innerHTML = data;
+            }, 1050)
+        });
+        socket.on('light', function (data) { //get button status from client
+            document.getElementById("light").checked = data; //change checkbox according to push button on Raspberry Pi
+            socket.emit("light", data); //send push button status to back to server
+        });
+        socket.on('start', function (data) {
+            console.log('read start');
+            console.log(data);
+            $rootScope.$broadcast('gameUpdate', data);
+            $rootScope.gameSettings = data;
+            $scope.$apply();
+            //setGameSettings(data);
+        });
+
+        socket.on('starting', function (data) {
+            console.log('starting in ' + data.countDown);
+            $rootScope.$broadcast('gameUpdate', data);
+
+            $scope.$apply();
+
+        });
+        socket.on('checkGame', function (data) {
+            console.log('checkGame');
+            console.log(data);
+
+            if (data.state === 'play' || data.state === 'starting') {
+
+                socket.emit("continueGame", data);
+
+
+            }
+
+
+        });
+        socket.on('finished', function (data) {
+            $rootScope.$broadcast('gameUpdate', data);
+            $scope.$apply();
+
+        });
+
+        $scope.startGame = function () {
+            if ($scope.gameSettings.state === 'menu' || $scope.gameSettings.state === 'finished') {
+                console.log('menu');
+                socket.emit("start", $scope.gameSettings);
+            }
+        }
+        $scope.p1button = function () {
+            if ($scope.gameSettings.state === 'play') {
+                console.log('p1button');
+                socket.emit("p1button", $scope.gameSettings);
+            }
+        }
+
+        $scope.p2button = function () {
+            if ($scope.gameSettings.state === 'play') {
+                console.log('p2button');
+                socket.emit("p2button", $scope.gameSettings);
+            }
+        }
+
+
+    });
+
+
+</script>
+</body>
+</html>
