@@ -40,8 +40,8 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="488">
-              <caret line="53" column="30" lean-forward="false" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
+            <state relative-caret-position="630">
+              <caret line="42" column="24" lean-forward="false" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -239,14 +239,7 @@
       <workItem from="1511334489973" duration="3382000" />
       <workItem from="1511419072041" duration="20662000" />
       <workItem from="1514395923257" duration="27364000" />
-      <workItem from="1515389643072" duration="2509000" />
-    </task>
-    <task id="LOCAL-00028" summary="log socket">
-      <created>1511425797564</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1511425797564</updated>
+      <workItem from="1515389643072" duration="2695000" />
     </task>
     <task id="LOCAL-00029" summary="angular">
       <created>1511502435162</created>
@@ -584,11 +577,18 @@
       <option name="project" value="LOCAL" />
       <updated>1515390854909</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="logger">
+      <created>1515392254495</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1515392254495</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59110000" />
+    <option name="totallyTimeSpent" value="59296000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="736" extended-state="6" />
@@ -651,7 +651,8 @@
     <MESSAGE value="log socket" />
     <MESSAGE value="angular" />
     <MESSAGE value="prune" />
-    <option name="LAST_COMMIT_MESSAGE" value="prune" />
+    <MESSAGE value="logger" />
+    <option name="LAST_COMMIT_MESSAGE" value="logger" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -882,8 +883,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="53" column="30" lean-forward="false" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
+        <state relative-caret-position="630">
+          <caret line="42" column="24" lean-forward="false" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
           <folding />
         </state>
       </provider>

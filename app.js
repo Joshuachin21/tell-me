@@ -40,9 +40,9 @@ io.sockets.on('connection', function (socket) {// WebSocket Connection
 
     Button1.unwatchAll();
 
-
+console.log('watching');
     Button1.watch(function (err, value) {
-console.log(value);
+        console.log(value);
         if (err) {
 
             console.error('There was an error', err); //output error message to console
@@ -50,11 +50,11 @@ console.log(value);
         }
 
 
-            if (value === 1) {
+        if (value === 1) {
             console.log('in');
-                google_home_itsy_bitsy_spider.play();
-                currentGameSettings.p1score += 1;
-            }
+            google_home_itsy_bitsy_spider.play();
+            currentGameSettings.p1score += 1;
+        }
 
 
     });
@@ -73,7 +73,6 @@ console.log(value);
 });
 
 process.on('SIGINT', function () { //on ctrl+c
-    Team1Player1.unexport(); // Unexport LED GPIO to free resources
-    Team2Player1.unexport(); // Unexport Button GPIO to free resources
+    Button1.unexport();
     process.exit(); //exit completely
 });
