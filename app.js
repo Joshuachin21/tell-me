@@ -20,7 +20,7 @@ http.listen(8080);
 // With full options
 
 var Sound = require('node-aplay');
-var google_home_itsy_bitsy_spider = new Sound(SOUND_BASE_URL + 'home_itsy_bitsy_spider.mp3');
+var google_home_itsy_bitsy_spider = new Sound(SOUND_BASE_URL + 'home_itsy_bitsy_spider.wav');
 
 function handler(req, res) { //create server
     fs.readFile(__dirname + '/public/index.html', function (err, data) { //read file index.html in public folder
@@ -53,7 +53,6 @@ console.log('watching');
         if (value === 1) {
             console.log('in');
             google_home_itsy_bitsy_spider.play();
-            currentGameSettings.p1score += 1;
         }
 
 
