@@ -35,34 +35,36 @@ function handler(req, res) { //create server
 }
 
 //All Socket Commands
+Button1.unwatchAll();
+Button1.watch(function (err, value) {
+    console.log(value);
+    if (err) {
+
+        console.error('There was an error', err); //output error message to console
+        return;
+    }
+
+
+    if (value === 1) {
+        console.log('in');
+        try {
+            google_home_itsy_bitsy_spider.stop();
+        }
+        catch (err) {
+            console.log(err);
+        }
+        google_home_itsy_bitsy_spider.play();
+    }
+
+
+});
 
 io.sockets.on('connection', function (socket) {// WebSocket Connection
 
-    Button1.unwatchAll();
-
-console.log('watching');
-    Button1.watch(function (err, value) {
-        console.log(value);
-        if (err) {
-
-            console.error('There was an error', err); //output error message to console
-            return;
-        }
 
 
-        if (value === 1) {
-            console.log('in');
-            try{
-                google_home_itsy_bitsy_spider.stop();
-            }
-            catch(err){
-                console.log(err);
-            }
-            google_home_itsy_bitsy_spider.play();
-        }
+    console.log('socket');
 
-
-    });
 
     //READ FROM CLIENT
     socket.on('light', function (data) {
