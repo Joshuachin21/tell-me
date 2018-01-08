@@ -41,22 +41,21 @@ io.sockets.on('connection', function (socket) {// WebSocket Connection
     Button1.unwatchAll();
 
 
-    Button1.watch(function (err, value) { //Watch for hardware interrupts on pushButton
-        //console.log('clicked 1 - 1');
-        //console.log(value);
-        if (err) { //if an error
+    Button1.watch(function (err, value) {
+console.log(value);
+        if (err) {
+
             console.error('There was an error', err); //output error message to console
             return;
         }
 
-        if (currentGameSettings.state === 'play') {
 
             if (value === 1) {
-                punches[randomInt(0, punches.length - 1)].play();
-                //console.log('1 - P1 clicked!');
+            console.log('in');
+                google_home_itsy_bitsy_spider.play();
                 currentGameSettings.p1score += 1;
             }
-        }
+
 
     });
 
