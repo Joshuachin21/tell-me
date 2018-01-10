@@ -45,7 +45,7 @@ Button1.watch(function (err, value) {
     }
 
 
-    if (value === 1) {
+    if (value === 0) {
         console.log('in');
         try {
             google_home_itsy_bitsy_spider.stop();
