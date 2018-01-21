@@ -8,6 +8,7 @@ var Button1 = new Gpio(18, 'in', 'rising', {
 });
 
 const SOUND_BASE_URL = '/home/pi/Music/google_home_commands/';
+const SONG_BASE_URL = '/home/pi/Music/songs/';
 
 var randomInt = function (min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -21,6 +22,8 @@ http.listen(8080);
 
 var Sound = require('node-aplay');
 var google_home_itsy_bitsy_spider = new Sound(SOUND_BASE_URL + 'home_itsy_bitsy_spider.wav');
+var choochooSong = new Sound(SONG_BASE_URL + 'ChuggaChuggaChooChoo.wav');
+
 
 function handler(req, res) { //create server
     fs.readFile(__dirname + '/public/index.html', function (err, data) { //read file index.html in public folder
@@ -48,12 +51,14 @@ Button1.watch(function (err, value) {
     if (value === 0) {
         console.log('in');
         try {
-            google_home_itsy_bitsy_spider.stop();
+            //google_home_itsy_bitsy_spider.stop();
+            choochooSong.stop();
         }
         catch (err) {
             console.log(err);
         }
-        google_home_itsy_bitsy_spider.play();
+        //google_home_itsy_bitsy_spider.play();
+        choochooSong.play();
     }
 
 
