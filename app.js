@@ -24,6 +24,11 @@ var Sound = require('node-aplay');
 var google_home_itsy_bitsy_spider = new Sound(SOUND_BASE_URL + 'home_itsy_bitsy_spider.wav');
 var choochooSong = new Sound(SONG_BASE_URL + 'ChuggaChuggaChooChoo.wav');
 
+var sounds = [];
+sounds.push(google_home_itsy_bitsy_spider);
+sounds.push(choochooSong);
+
+var iterator = 0;
 
 function handler(req, res) { //create server
     fs.readFile(__dirname + '/public/index.html', function (err, data) { //read file index.html in public folder
@@ -52,20 +57,26 @@ Button1.watch(function (err, value) {
         console.log('in');
         try {
             //google_home_itsy_bitsy_spider.stop();
-            choochooSong.stop();
+            sounds[iterator].stop();
+
         }
         catch (err) {
             console.log(err);
         }
+        if (iterator === 1) {
+            iterator = 0;
+        }
+        else {
+            iterator = 1;
+        }
         //google_home_itsy_bitsy_spider.play();
-        choochooSong.play();
+        sounds[iterator].play();
     }
 
 
 });
 
 io.sockets.on('connection', function (socket) {// WebSocket Connection
-
 
 
     console.log('socket');
