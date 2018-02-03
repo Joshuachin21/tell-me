@@ -57,20 +57,14 @@ Button1.watch(function (err, value) {
         console.log('in');
         try {
             //google_home_itsy_bitsy_spider.stop();
-            sounds[iterator].stop();
+            google_home_itsy_bitsy_spider.stop();
 
         }
         catch (err) {
             console.log(err);
         }
-        if (iterator === 1) {
-            iterator = 0;
-        }
-        else {
-            iterator = 1;
-        }
         //google_home_itsy_bitsy_spider.play();
-        sounds[iterator].play();
+        google_home_itsy_bitsy_spider.play();
     }
 
 
