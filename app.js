@@ -56,15 +56,15 @@ Button1.watch(function (err, value) {
     if (value === 0) {
         console.log('in');
         try {
-            //google_home_itsy_bitsy_spider.stop();
-            choochooSong.stop();
+            google_home_itsy_bitsy_spider.stop();
+            //choochooSong.stop();
 
         }
         catch (err) {
             console.log(err);
         }
-        //google_home_itsy_bitsy_spider.play();
-        choochooSong.play();
+        google_home_itsy_bitsy_spider.play();
+        //choochooSong.play();
     }
 
 
