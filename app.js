@@ -68,6 +68,7 @@ sounds.push(jesus_loves_me);
 sounds.push(songs_by_listener_kids);
 
 var iterator = 0;
+var last_iterator = null;
 
 function handler(req, res) { //create server
     fs.readFile(__dirname + '/public/index.html', function (err, data) { //read file index.html in public folder
@@ -86,11 +87,15 @@ Button1.unwatchAll();
 Button2.unwatchAll();
 Button3.unwatchAll();
 
-function iterate(){
+function iterate() {
+    last_iterator = iterator;
     iterator = iterator + 1;
-    if(iterator > sounds.length - 1){
+
+    if (iterator > sounds.length - 1) {
         iterator = 0;
     }
+    console.log('last iteration: ' + last_iterator);
+    console.log('current iteration: ' + iterator);
 }
 
 Button1.watch(function (err, value) {
@@ -102,10 +107,11 @@ Button1.watch(function (err, value) {
 
     if (value === 0) {
         console.log('in');
+
         try {
-
-            sounds[iterator].stop();
-
+            if (last_iterator) {
+                sounds[last_iterator].stop();
+            }
         }
         catch (err) {
             console.log(err);
@@ -122,16 +128,16 @@ Button2.watch(function (err, value) {
         return;
     }
 
-    if (value === 0) {
+    if (value === 1) {
         console.log('in');
         try {
-            google_stop.stop();
+            google_next.stop();
 
         }
         catch (err) {
             console.log(err);
         }
-        google_stop.play();
+        google_next.play();
     }
 });
 
@@ -142,16 +148,16 @@ Button3.watch(function (err, value) {
         return;
     }
 
-    if (value === 0) {
+    if (value === 1) {
         console.log('in');
         try {
-            google_next.stop();
+            google_stop.stop();
 
         }
         catch (err) {
             console.log(err);
         }
-        google_next.play();
+        google_stop.play();
     }
 });
 
