@@ -67,6 +67,25 @@ sounds.push(itsy_bitsy_spider);
 sounds.push(jesus_loves_me);
 sounds.push(songs_by_listener_kids);
 
+var allSounds = [];
+
+
+allSounds.push(choo_choo);
+allSounds.push(itsy_bitsy_spider);
+allSounds.push(jesus_loves_me);
+allSounds.push(songs_by_listener_kids);
+allSounds.push(google_next);
+allSounds.push(google_stop);
+
+
+
+
+
+
+
+
+
+
 var iterator = 0;
 var last_iterator = null;
 
@@ -98,6 +117,18 @@ function iterate() {
     console.log('current iteration: ' + iterator);
 }
 
+function stopSounds() {
+    allSounds.map((sound) => {
+
+        try {
+            sound.stop();
+        }
+        catch
+            (err) {
+            console.log(err);
+        }
+    });
+}
 Button1.watch(function (err, value) {
     console.log(value);
     if (err) {
@@ -108,18 +139,7 @@ Button1.watch(function (err, value) {
     if (value === 0) {
         console.log('in');
 
-
-        sounds.map((sound) => {
-
-            try {
-                sound.stop();
-            }
-            catch
-                (err) {
-                console.log(err);
-            }
-        });
-
+        stopSounds();
         sounds[iterator].play();
         iterate();
     }
@@ -134,13 +154,7 @@ Button2.watch(function (err, value) {
 
     if (value === 1) {
         console.log('in');
-        try {
-            google_next.stop();
-
-        }
-        catch (err) {
-            console.log(err);
-        }
+        stopSounds();
         google_next.play();
     }
 });
@@ -154,13 +168,7 @@ Button3.watch(function (err, value) {
 
     if (value === 1) {
         console.log('in');
-        try {
-            google_stop.stop();
-
-        }
-        catch (err) {
-            console.log(err);
-        }
+        stopSounds();
         google_stop.play();
     }
 });
