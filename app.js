@@ -2,18 +2,45 @@ var http = require('http').createServer(handler); //require http server, and cre
 var fs = require('fs'); //require filesystem module
 var io = require('socket.io')(http); //require socket.io module and pass the http object (server)
 var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
+const HomeCommands = require('./services/HomeCommands.services');
+const CONFIG = require('./config');
+const SOUND_BASE_URL = '/home/pi/Music/google_home_commands/';
+const SONG_BASE_URL = '/home/pi/Music/songs/';
 
+/*
+* INIT GPIOs
+*
+*/
 var Button1 = new Gpio(18, 'in', 'rising', {
     debounceTimeout: 50
 });
 
-const SOUND_BASE_URL = '/home/pi/Music/google_home_commands/';
-const SONG_BASE_URL = '/home/pi/Music/songs/';
+var Button2 = new Gpio(17, 'in', 'rising', {
+    debounceTimeout: 50
+});
+
+var Button3 = new Gpio(27, 'in', 'rising', {
+    debounceTimeout: 50
+});
+
+
+/*
+* INIT Sounds
+*
+*/
+
+const ItsyBitsySpider = new HomeCommands();
+
 
 var randomInt = function (min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
+
+/*
+* INIT webserver
+*
+*/
 http.listen(8080);
 
 //SOUNDS
@@ -21,12 +48,24 @@ http.listen(8080);
 // With full options
 
 var Sound = require('node-aplay');
-var google_home_itsy_bitsy_spider = new Sound(SOUND_BASE_URL + 'home_itsy_bitsy_spider.wav');
-var choochooSong = new Sound(SONG_BASE_URL + 'ChuggaChuggaChooChoo.wav');
+
+var choo_choo = new Sound(SOUND_BASE_URL + 'google_choochoo_livingroom_home.wav');
+var itsy_bitsy_spider = new Sound(SOUND_BASE_URL + 'google_itsy_bitsy.wav');
+var jesus_loves_me = new Sound(SOUND_BASE_URL + 'jesus_loves_me.wav');
+var songs_by_listener_kids = new Sound(SOUND_BASE_URL + 'listener_kids.wav');
+var on_the_livingroom_home = new Sound(SOUND_BASE_URL + 'on_the_livingroom_home.wav');
+
+//GH tools
+
+var google_next = new Sound(SOUND_BASE_URL + 'google_next.wav');
+var google_stop = new Sound(SOUND_BASE_URL + 'google_stop.wav');
+
 
 var sounds = [];
-sounds.push(google_home_itsy_bitsy_spider);
-sounds.push(choochooSong);
+sounds.push(choo_choo);
+sounds.push(itsy_bitsy_spider);
+sounds.push(jesus_loves_me);
+sounds.push(songs_by_listener_kids);
 
 var iterator = 0;
 
@@ -44,52 +83,91 @@ function handler(req, res) { //create server
 
 //All Socket Commands
 Button1.unwatchAll();
+Button2.unwatchAll();
+Button3.unwatchAll();
+
+function iterate(){
+    iterator = iterator + 1;
+    if(iterator > sounds.length - 1){
+        iterator = 0;
+    }
+}
+
 Button1.watch(function (err, value) {
     console.log(value);
     if (err) {
-
         console.error('There was an error', err); //output error message to console
         return;
     }
 
-
     if (value === 0) {
         console.log('in');
         try {
-            google_home_itsy_bitsy_spider.stop();
-            //choochooSong.stop();
+
+            sounds[iterator].stop();
 
         }
         catch (err) {
             console.log(err);
         }
-        google_home_itsy_bitsy_spider.play();
-        //choochooSong.play();
+        sounds[iterator].play();
+        iterate();
+    }
+});
+
+Button2.watch(function (err, value) {
+    console.log(value);
+    if (err) {
+        console.error('There was an error', err); //output error message to console
+        return;
     }
 
+    if (value === 0) {
+        console.log('in');
+        try {
+            google_stop.stop();
 
+        }
+        catch (err) {
+            console.log(err);
+        }
+        google_stop.play();
+    }
+});
+
+Button3.watch(function (err, value) {
+    console.log(value);
+    if (err) {
+        console.error('There was an error', err); //output error message to console
+        return;
+    }
+
+    if (value === 0) {
+        console.log('in');
+        try {
+            google_next.stop();
+
+        }
+        catch (err) {
+            console.log(err);
+        }
+        google_next.play();
+    }
 });
 
 io.sockets.on('connection', function (socket) {// WebSocket Connection
-
-
     console.log('socket');
-
-
     //READ FROM CLIENT
     socket.on('light', function (data) {
-        lightvalue = data;
-        //console.log('changed light switch pi');
-
-        rand = 11919191498 + Date.now();
         setTimeout(function () {
             socket.emit('score', rand);
         }, 1000);
     });
-
 });
 
 process.on('SIGINT', function () { //on ctrl+c
     Button1.unexport();
+    Button2.unexport();
+    Button3.unexport();
     process.exit(); //exit completely
 });
