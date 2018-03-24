@@ -108,14 +108,18 @@ Button1.watch(function (err, value) {
     if (value === 0) {
         console.log('in');
 
-        try {
-            if (last_iterator) {
-                sounds[last_iterator].stop();
+
+        sounds.map((sound) => {
+
+            try {
+                sound.stop();
             }
-        }
-        catch (err) {
-            console.log(err);
-        }
+            catch
+                (err) {
+                console.log(err);
+            }
+        });
+
         sounds[iterator].play();
         iterate();
     }
