@@ -6,6 +6,18 @@ const HomeCommands = require('./services/HomeCommands.services');
 const CONFIG = require('./config');
 const SOUND_BASE_URL = '/home/pi/Music/google_home_commands/';
 const SONG_BASE_URL = '/home/pi/Music/songs/';
+/*
+* logger
+*
+*/
+
+const LOGGING = false;
+
+function log(data){
+    if(LOGGING){
+        console.log(data);
+    }
+}
 
 /*
 * INIT GPIOs
@@ -91,30 +103,30 @@ function iterate() {
     if (iterator > sounds.length - 1) {
         iterator = 0;
     }
-    console.log('last iteration: ' + last_iterator);
-    console.log('current iteration: ' + iterator);
+    log('last iteration: ' + last_iterator);
+    log('current iteration: ' + iterator);
 }
 
 function stopSounds() {
     try {
-        console.log(current_sound);
+        log(current_sound);
         current_sound.stop();
     }
     catch
         (err) {
-        console.log(err);
+        log(err);
     }
 }
 
 Button1.watch(function (err, value) {
-    console.log(value);
+    log(value);
     if (err) {
         console.error('There was an error', err); //output error message to console
         return;
     }
 
     if (value === 0) {
-        console.log('in');
+        log('in');
 
         stopSounds();
         current_sound = new Sound(SOUND_BASE_URL + sounds[iterator]);
@@ -124,14 +136,14 @@ Button1.watch(function (err, value) {
 });
 
 Button2.watch(function (err, value) {
-    console.log(value);
+    log(value);
     if (err) {
         console.error('There was an error', err); //output error message to console
         return;
     }
 
     if (value === 1) {
-        console.log('in');
+        log('in');
         stopSounds();
         current_sound = new Sound(SOUND_BASE_URL + command_sounds[0]);
         current_sound.play();
@@ -139,14 +151,14 @@ Button2.watch(function (err, value) {
 });
 
 Button3.watch(function (err, value) {
-    console.log(value);
+    log(value);
     if (err) {
         console.error('There was an error', err); //output error message to console
         return;
     }
 
     if (value === 1) {
-        console.log('in');
+        log('in');
         stopSounds();
         current_sound = new Sound(SOUND_BASE_URL + command_sounds[1]);
         current_sound.play();
@@ -154,7 +166,7 @@ Button3.watch(function (err, value) {
 });
 
 io.sockets.on('connection', function (socket) {// WebSocket Connection
-    console.log('socket');
+    log('socket');
     //READ FROM CLIENT
     socket.on('light', function (data) {
         setTimeout(function () {
