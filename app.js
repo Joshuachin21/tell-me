@@ -47,44 +47,22 @@ http.listen(8080);
 
 // With full options
 
+
+const sounds = [
+    'google_choochoo_livingroom_home.wav',
+    'google_itsy_bitsy.wav',
+    'jesus_loves_me.wav',
+    'listener_kids.wav'
+];
+
+const command_sounds = [
+    'google_next.wav',
+    'google_stop.wav'
+];
+
 var Sound = require('node-aplay');
 
-var choo_choo = new Sound(SOUND_BASE_URL + 'google_choochoo_livingroom_home.wav');
-var itsy_bitsy_spider = new Sound(SOUND_BASE_URL + 'google_itsy_bitsy.wav');
-var jesus_loves_me = new Sound(SOUND_BASE_URL + 'jesus_loves_me.wav');
-var songs_by_listener_kids = new Sound(SOUND_BASE_URL + 'listener_kids.wav');
-var on_the_livingroom_home = new Sound(SOUND_BASE_URL + 'on_the_livingroom_home.wav');
-
-//GH tools
-
-var google_next = new Sound(SOUND_BASE_URL + 'google_next.wav');
-var google_stop = new Sound(SOUND_BASE_URL + 'google_stop.wav');
-
-
-var sounds = [];
-sounds.push(choo_choo);
-sounds.push(itsy_bitsy_spider);
-sounds.push(jesus_loves_me);
-sounds.push(songs_by_listener_kids);
-
-var allSounds = [];
-
-
-allSounds.push(choo_choo);
-allSounds.push(itsy_bitsy_spider);
-allSounds.push(jesus_loves_me);
-allSounds.push(songs_by_listener_kids);
-allSounds.push(google_next);
-allSounds.push(google_stop);
-
-
-
-
-
-
-
-
-
+let current_sound = new Sound(SOUND_BASE_URL + 'google_stop.wav');
 
 var iterator = 0;
 var last_iterator = null;
@@ -118,17 +96,15 @@ function iterate() {
 }
 
 function stopSounds() {
-    allSounds.map((sound) => {
-
-        try {
-            sound.stop();
-        }
-        catch
-            (err) {
-            console.log(err);
-        }
-    });
+    try {
+        current_sound.stop();
+    }
+    catch
+        (err) {
+        console.log(err);
+    }
 }
+
 Button1.watch(function (err, value) {
     console.log(value);
     if (err) {
@@ -140,7 +116,7 @@ Button1.watch(function (err, value) {
         console.log('in');
 
         stopSounds();
-        sounds[iterator].play();
+        current_sound = new Sound(SOUND_BASE_URL + sounds[iterator]).play();
         iterate();
     }
 });
@@ -155,7 +131,7 @@ Button2.watch(function (err, value) {
     if (value === 1) {
         console.log('in');
         stopSounds();
-        google_next.play();
+        current_sound = new Sound(SOUND_BASE_URL + command_sounds[0]).play();
     }
 });
 
@@ -169,7 +145,7 @@ Button3.watch(function (err, value) {
     if (value === 1) {
         console.log('in');
         stopSounds();
-        google_stop.play();
+        current_sound = new Sound(SOUND_BASE_URL + command_sounds[1]).play();
     }
 });
 
