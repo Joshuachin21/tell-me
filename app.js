@@ -97,6 +97,7 @@ function iterate() {
 
 function stopSounds() {
     try {
+        console.log(current_sound);
         current_sound.stop();
     }
     catch
@@ -116,7 +117,8 @@ Button1.watch(function (err, value) {
         console.log('in');
 
         stopSounds();
-        current_sound = new Sound(SOUND_BASE_URL + sounds[iterator]).play();
+        current_sound = new Sound(SOUND_BASE_URL + sounds[iterator]);
+        current_sound.play();
         iterate();
     }
 });
@@ -131,7 +133,8 @@ Button2.watch(function (err, value) {
     if (value === 1) {
         console.log('in');
         stopSounds();
-        current_sound = new Sound(SOUND_BASE_URL + command_sounds[0]).play();
+        current_sound = new Sound(SOUND_BASE_URL + command_sounds[0]);
+        current_sound.play();
     }
 });
 
@@ -145,7 +148,8 @@ Button3.watch(function (err, value) {
     if (value === 1) {
         console.log('in');
         stopSounds();
-        current_sound = new Sound(SOUND_BASE_URL + command_sounds[1]).play();
+        current_sound = new Sound(SOUND_BASE_URL + command_sounds[1]);
+        current_sound.play();
     }
 });
 
