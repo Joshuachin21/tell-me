@@ -35,6 +35,14 @@ var Button3 = new Gpio(27, 'in', 'rising', {
     debounceTimeout: 50
 });
 
+var Button4 = new Gpio(22, 'in', 'rising', {
+    debounceTimeout: 50
+});/*
+
+var Button3 = new Gpio(23, 'in', 'rising', {
+    debounceTimeout: 50
+});*/
+
 
 /*
 * INIT Sounds
@@ -61,15 +69,17 @@ http.listen(8080);
 
 
 const sounds = [
-    'google_choochoo_livingroom_home.wav',
+    //'google_choochoo_livingroom_home.wav',
     'google_itsy_bitsy.wav',
     'jesus_loves_me.wav',
-    'listener_kids.wav'
+    'listener_kids.wav',
+    'google_old_mcdonald.wav'
 ];
 
 const command_sounds = [
     'google_next.wav',
-    'google_stop.wav'
+    'google_stop.wav',
+    'google_say_abcs.wav'
 ];
 
 var Sound = require('node-aplay');
@@ -161,6 +171,21 @@ Button3.watch(function (err, value) {
         log('in');
         stopSounds();
         current_sound = new Sound(SOUND_BASE_URL + command_sounds[1]);
+        current_sound.play();
+    }
+});
+
+Button4.watch(function (err, value) {
+    log(value);
+    if (err) {
+        console.error('There was an error', err); //output error message to console
+        return;
+    }
+
+    if (value === 1) {
+        log('in');
+        stopSounds();
+        current_sound = new Sound(SOUND_BASE_URL + command_sounds[2]);
         current_sound.play();
     }
 });
