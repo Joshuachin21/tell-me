@@ -105,6 +105,7 @@ function handler(req, res) { //create server
 Button1.unwatchAll();
 Button2.unwatchAll();
 Button3.unwatchAll();
+Button4.unwatchAll();
 
 function iterate() {
     last_iterator = iterator;
@@ -204,5 +205,6 @@ process.on('SIGINT', function () { //on ctrl+c
     Button1.unexport();
     Button2.unexport();
     Button3.unexport();
+    Button4.unexport();
     process.exit(); //exit completely
 });
