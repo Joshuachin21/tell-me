@@ -137,7 +137,7 @@ Button1.watch(function (err, value) {
         return;
     }
 
-    if (value === 1) {
+    if (value === 0) {
         log('in');
 
         stopSounds();
