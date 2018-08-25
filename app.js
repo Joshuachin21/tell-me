@@ -131,6 +131,7 @@ function stopSounds() {
 
 Button1.watch(function (err, value) {
     log(value);
+    console.log(value);
     if (err) {
         console.error('There was an error', err); //output error message to console
         return;
@@ -152,7 +153,7 @@ Button2.watch(function (err, value) {
         console.error('There was an error', err); //output error message to console
         return;
     }
-
+    console.log(value);
     if (value === 1) {
         log('in');
         stopSounds();
@@ -167,7 +168,7 @@ Button3.watch(function (err, value) {
         console.error('There was an error', err); //output error message to console
         return;
     }
-
+    console.log(value);
     if (value === 1) {
         log('in');
         stopSounds();
@@ -182,7 +183,7 @@ Button4.watch(function (err, value) {
         console.error('There was an error', err); //output error message to console
         return;
     }
-
+    console.log(value);
     if (value === 1) {
         log('in');
         stopSounds();
