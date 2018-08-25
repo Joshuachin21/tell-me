@@ -23,7 +23,7 @@ function log(data){
 * INIT GPIOs
 *
 */
-var Button1 = new Gpio(18, 'in', 'rising', {
+var Button1 = new Gpio(23, 'in', 'rising', {
     debounceTimeout: 50
 });
 
@@ -136,7 +136,7 @@ Button1.watch(function (err, value) {
         return;
     }
 
-    if (value === 0) {
+    if (value === 1) {
         log('in');
 
         stopSounds();
