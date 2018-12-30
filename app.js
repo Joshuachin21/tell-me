@@ -51,11 +51,14 @@ let FishRelay = null;
 let FishRelayState = false;
 
 
+let FishDebounceDelay = false;
 
-
-
-
-
+const startDebounceTime = () => {
+    FishDebounceDelay = true;
+    setTimeout(() => {
+        FishDebounceDelay = false;
+    }, 500);
+};
 
 
 /*
@@ -72,6 +75,10 @@ var Button3 = new Gpio(23, 'in', 'rising', {
 
 
 function relay_on() {
+    if (FishDebounceDelay) {
+        return;
+    }
+    startDebounceTime();
     FishRelayState = true;
     FishRelay = new Gpio(6, 'out');
     FishRelay.writeSync(1);
@@ -79,13 +86,20 @@ function relay_on() {
 }
 
 function relay_off(gpio) {
+    if (FishDebounceDelay) {
+        return;
+    }
+    startDebounceTime();
     FishRelayState = false;
     gpio.writeSync(0);
     gpio.unexport();
+
     console.log('relay off');
+
 }
+
 function read_status(gpio) {
-    if (!gpio){
+    if (!gpio) {
         return 0;
     }
     return gpio.readSync();
