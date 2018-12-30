@@ -49,9 +49,7 @@ let FishButtonShort = new Gpio(25, 'in', 'rising', {
 });
 
 //todo update gpio pin
-let FishRelay = new Gpio(21, 'in', 'rising', {
-    debounceTimeout: 50
-});
+let FishRelay = new Gpio(21, 'out');
 
 
 /*
@@ -65,6 +63,19 @@ var Button3 = new Gpio(23, 'in', 'rising', {
 * INIT Sounds
 *
 */
+
+
+function relay_on(gpio) {
+    gpio.writeSync(1);
+}
+
+function relay_off(gpio) {
+    gpio.writeSync(0);
+}
+function read_status(gpio) {
+    return gpio.readSync();
+}
+
 
 const ItsyBitsySpider = new HomeCommands();
 
@@ -218,14 +229,14 @@ FishButtonShort.watch(function (err, value) {
     }
     console.log(value);
     if (value === 1) {
-        let fishStatus = FishRelay.readSync();
+        let fishStatus = read_status(FishRelay);
 
         if (fishStatus === 1) {
-            FishRelay.writeSync(0);
+            relay_off(FishRelay);
         }
 
         else {
-            FishRelay.writeSync(1);
+            relay_on(FishRelay);
         }
     }
 });
