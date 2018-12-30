@@ -260,10 +260,16 @@ FishButtonShort.watch(function (err, value) {
     if (value === 1) {
         if (FishRelayState) {
             relay_off(FishRelay);
-        }
-
-        else {
             relay_on();
+            setTimeout(()=>{
+                relay_off(FishRelay);
+            }, 1000);
+        }
+        else{
+            relay_on();
+            setTimeout(()=>{
+                relay_off(FishRelay);
+            }, 1000);
         }
     }
 });
