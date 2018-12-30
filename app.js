@@ -24,27 +24,27 @@ function log(data) {
 *
 */
 var Button1 = new Gpio(23, 'in', 'rising', {
-    debounceTimeout: 50
+    debounceTimeout: 250
 });
 
 var Button2 = new Gpio(17, 'in', 'rising', {
-    debounceTimeout: 50
+    debounceTimeout: 250
 });
 
 var Button3 = new Gpio(27, 'in', 'rising', {
-    debounceTimeout: 50
+    debounceTimeout: 250
 });
 
 var Button4 = new Gpio(22, 'in', 'rising', {
-    debounceTimeout: 50
+    debounceTimeout: 250
 });
 
 let FishButtonLong = new Gpio(24, 'in', 'rising', {
-    debounceTimeout: 50
+    debounceTimeout: 250
 });
 
 let FishButtonShort = new Gpio(25, 'in', 'rising', {
-    debounceTimeout: 50
+    debounceTimeout: 250
 });
 
 let FishRelay = null;
