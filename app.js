@@ -39,7 +39,6 @@ var Button4 = new Gpio(22, 'in', 'rising', {
     debounceTimeout: 50
 });
 
-//todo update gpio pin
 let FishButtonLong = new Gpio(24, 'in', 'rising', {
     debounceTimeout: 50
 });
@@ -48,8 +47,40 @@ let FishButtonShort = new Gpio(25, 'in', 'rising', {
     debounceTimeout: 50
 });
 
-//todo update gpio pin
-let FishRelay = new Gpio(21, 'out');
+let FishRelay = null;
+
+
+
+
+
+let relay = null;
+function motor_on(gpio) {
+    console.log("motor_on");
+    relay.writeSync(1);
+}
+
+function motor_off(gpio) {
+    console.log("motor_off");
+
+    gpio.writeSync(0);
+}
+
+motor_on();
+setTimeout(function () {
+    motor_off(relay);
+}, 2000);
+
+setTimeout(function (){
+    motor_on();
+    setTimeout(function (){
+        motor_off(relay);
+    },2000);
+}, 4000);
+
+
+
+
+
 
 
 /*
@@ -65,14 +96,22 @@ var Button3 = new Gpio(23, 'in', 'rising', {
 */
 
 
-function relay_on(gpio) {
-    gpio.writeSync(1);
+function relay_on() {
+    relay = new Gpio(6, 'out');
+    relay.writeSync(1);
+    console.log('relay on');
 }
 
 function relay_off(gpio) {
+
     gpio.writeSync(0);
+    gpio.unexport();
+    console.log('relay off');
 }
 function read_status(gpio) {
+    if (!gpio){
+        return 0;
+    }
     return gpio.readSync();
 }
 
@@ -236,7 +275,7 @@ FishButtonShort.watch(function (err, value) {
         }
 
         else {
-            relay_on(FishRelay);
+            relay_on();
         }
     }
 });
