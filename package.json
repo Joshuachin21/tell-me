@@ -1,14 +1,14 @@
 {
-  "name": "push-game",
+  "name": "tell-me",
   "version": "1.0.0",
-  "description": "Raspberry Pi game that involves 2 teams that push buttons in a tug-of-war type battle where the collective count of button presses determines a winner.",
-  "main": "index.js",
+  "description": "Program to run an interactive table with buttons that control a relay for a bubble tube, and commands that play music on a google home.",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Joshuachin21/push-game.git"
+    "url": "git+https://github.com/Joshuachin21/tell-me.git"
   },
   "dependencies": {
     "fs": "0.0.1-security",
@@ -20,7 +20,7 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Joshuachin21/push-game/issues"
+    "url": "https://github.com/Joshuachin21/tell-me/issues"
   },
-  "homepage": "https://github.com/Joshuachin21/push-game#readme"
+  "homepage": "https://github.com/Joshuachin21/tell-me#readme"
 }

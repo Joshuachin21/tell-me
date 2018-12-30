@@ -13,8 +13,8 @@ const SONG_BASE_URL = '/home/pi/Music/songs/';
 
 const LOGGING = false;
 
-function log(data){
-    if(LOGGING){
+function log(data) {
+    if (LOGGING) {
         console.log(data);
     }
 }
@@ -37,7 +37,25 @@ var Button3 = new Gpio(27, 'in', 'rising', {
 
 var Button4 = new Gpio(22, 'in', 'rising', {
     debounceTimeout: 50
-});/*
+});
+
+//todo update gpio pin
+let FishButtonLong = new Gpio(6, 'in', 'rising', {
+    debounceTimeout: 50
+});
+
+//todo update gpio pin
+let FishButtonShort = new Gpio(9, 'in', 'rising', {
+    debounceTimeout: 50
+});
+
+//todo update gpio pin
+let FishRelay = new Gpio(12, 'in', 'rising', {
+    debounceTimeout: 50
+});
+
+
+/*
 
 var Button3 = new Gpio(23, 'in', 'rising', {
     debounceTimeout: 50
@@ -106,6 +124,8 @@ Button1.unwatchAll();
 Button2.unwatchAll();
 Button3.unwatchAll();
 Button4.unwatchAll();
+FishButtonLong.unwatchAll();
+FishButtonShort.unwatchAll();
 
 function iterate() {
     last_iterator = iterator;
@@ -139,7 +159,6 @@ Button1.watch(function (err, value) {
 
     if (value === 0) {
         log('in');
-
         stopSounds();
         current_sound = new Sound(SOUND_BASE_URL + sounds[iterator]);
         current_sound.play();
@@ -192,6 +211,49 @@ Button4.watch(function (err, value) {
     }
 });
 
+FishButtonShort.watch(function (err, value) {
+    log(value);
+    if (err) {
+        console.error('There was an error', err); //output error message to console
+        return;
+    }
+    console.log(value);
+    if (value === 1) {
+        let fishStatus = FishRelay.readSync();
+
+        if (fishStatus === 1) {
+            FishRelay.writeSync(0);
+        }
+
+        else {
+            FishRelay.writeSync(1);
+        }
+    }
+});
+
+
+FishButtonLong.watch(function (err, value) {
+    log(value);
+    if (err) {
+        console.error('There was an error', err); //output error message to console
+        return;
+    }
+    console.log(value);
+    if (value === 1) {
+        let fishStatus = FishRelay.readSync();
+
+        if (fishStatus === 1) {
+            //todo turn off a light of some sort
+            FishRelay.writeSync(0);
+        }
+
+        else {
+            //todo turn on a light of some sort
+            FishRelay.writeSync(1);
+        }
+    }
+});
+
 io.sockets.on('connection', function (socket) {// WebSocket Connection
     log('socket');
     //READ FROM CLIENT
@@ -207,5 +269,7 @@ process.on('SIGINT', function () { //on ctrl+c
     Button2.unexport();
     Button3.unexport();
     Button4.unexport();
+    FishButtonLong.unexport();
+    FishButtonShort.unexport();
     process.exit(); //exit completely
 });
