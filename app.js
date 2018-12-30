@@ -48,6 +48,7 @@ let FishButtonShort = new Gpio(25, 'in', 'rising', {
 });
 
 let FishRelay = null;
+let FishRelayState = false;
 
 
 
@@ -71,12 +72,14 @@ var Button3 = new Gpio(23, 'in', 'rising', {
 
 
 function relay_on() {
+    FishRelayState = true;
     FishRelay = new Gpio(6, 'out');
     FishRelay.writeSync(1);
     console.log('relay on');
 }
 
 function relay_off(gpio) {
+    FishRelayState = false;
     gpio.writeSync(0);
     gpio.unexport();
     console.log('relay off');
@@ -241,9 +244,7 @@ FishButtonShort.watch(function (err, value) {
     }
     console.log(value);
     if (value === 1) {
-        let fishStatus = read_status(FishRelay);
-
-        if (fishStatus === 1) {
+        if (FishRelayState) {
             relay_off(FishRelay);
         }
 
@@ -253,7 +254,6 @@ FishButtonShort.watch(function (err, value) {
     }
 });
 
-
 FishButtonLong.watch(function (err, value) {
     log(value);
     if (err) {
@@ -262,16 +262,12 @@ FishButtonLong.watch(function (err, value) {
     }
     console.log(value);
     if (value === 1) {
-        let fishStatus = FishRelay.readSync();
-
-        if (fishStatus === 1) {
-            //todo turn off a light of some sort
-            FishRelay.writeSync(0);
+        if (FishRelayState) {
+            relay_off(FishRelay);
         }
 
         else {
-            //todo turn on a light of some sort
-            FishRelay.writeSync(1);
+            relay_on();
         }
     }
 });
