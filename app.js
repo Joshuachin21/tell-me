@@ -40,17 +40,16 @@ var Button4 = new Gpio(22, 'in', 'rising', {
 });
 
 //todo update gpio pin
-let FishButtonLong = new Gpio(6, 'in', 'rising', {
+let FishButtonLong = new Gpio(24, 'in', 'rising', {
+    debounceTimeout: 50
+});
+
+let FishButtonShort = new Gpio(25, 'in', 'rising', {
     debounceTimeout: 50
 });
 
 //todo update gpio pin
-let FishButtonShort = new Gpio(9, 'in', 'rising', {
-    debounceTimeout: 50
-});
-
-//todo update gpio pin
-let FishRelay = new Gpio(12, 'in', 'rising', {
+let FishRelay = new Gpio(21, 'in', 'rising', {
     debounceTimeout: 50
 });
 
