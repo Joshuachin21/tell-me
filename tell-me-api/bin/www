@@ -8,6 +8,7 @@ var app = require('../app');
 var debug = require('debug')('tell-me-api:server');
 var http = require('http');
 var https = require('https');
+var fs = require('fs');
 
 
 var key = fs.readFileSync('/home/pi/private.key');
