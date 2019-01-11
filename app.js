@@ -2,12 +2,13 @@ var http = require('http').createServer(handler); //require http server, and cre
 var fs = require('fs'); //require filesystem module
 var io = require('socket.io')(http); //require socket.io module and pass the http object (server)
 var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
-const HomeCommands = require('./services/HomeCommands.services');
-const GoogleDriveServices = require('./services/GoogleDriveServices');
-const CONFIG = require('./config');
-const SOUND_BASE_URL = './google_home_commands/';
-const UTILITY_SOUND_BASE_URL = './google_home_utility_commands/';
-const SONG_BASE_URL = './songs/';
+const fullAppPath = '/home/pi/REPOs/tell-me/';
+const HomeCommands = require(fullAppPath + 'services/HomeCommands.services');
+const GoogleDriveServices = require(fullAppPath + 'services/GoogleDriveServices');
+const CONFIG = require(fullAppPath + 'config');
+const SOUND_BASE_URL = fullAppPath + 'google_home_commands/';
+const UTILITY_SOUND_BASE_URL = fullAppPath + 'google_home_utility_commands/';
+const SONG_BASE_URL = fullAppPath + 'songs/';
 /*
 * logger
 *
@@ -340,13 +341,13 @@ FishButtonShort.watch(function (err, value) {
             relay_on();
             setTimeout(() => {
                 relay_off(FishRelay);
-            }, 500);
+            }, 1200);
         }
         else {
             relay_on();
             setTimeout(() => {
                 relay_off(FishRelay);
-            }, 500);
+            }, 1200);
         }
     }
 });
