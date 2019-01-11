@@ -17,8 +17,7 @@ var cert = fs.readFileSync( '/home/pi/server.crt' );
 
 var options = {
     key: key,
-    cert: cert,
-    ca: ca
+    cert: cert
 };
 /**
  * Get port from environment and store in Express.
