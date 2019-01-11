@@ -94,17 +94,31 @@ function updateSoundFilenames() {
         })
 }
 
+function playSound(path) {
+    stopSounds();
+    current_sound = new Sound(path);
+    current_sound.play();
+}
 
 function update_google_home_commands() {
     if (CommandsUpdateButtonDebounceDelay) {
         console.log("Update Debounced. wait 30 sec.");
         return;
     }
+
+    playSound(UTILITY_SOUND_BASE_URL + command_sounds[3]);
     startDebounceTime(CommandsUpdateButtonDebounceDelay, 30000);
     //todo add init sound here
     console.log('updating');
     return GoogleDriveServices.updateCommands()
-        .then(updateSoundFilenames);
+        .then(updateSoundFilenames)
+        .then(()=>{
+            playSound(UTILITY_SOUND_BASE_URL + command_sounds[4]);
+        })
+        .catch((e)=>{
+            console.log(e);
+            playSound(UTILITY_SOUND_BASE_URL + command_sounds[5]);
+        });
 }
 
 function relay_on() {
@@ -163,10 +177,15 @@ let sounds = [];
 let command_sounds = [
     'google_next.wav',
     'google_stop.wav',
-    'google_say_abcs.wav'
-];
+    'google_say_abcs.wav',
+    'downloading_commands_now.wav',
+    'downloads_complete.wav',
+    'error_with_downloads.wav'
 
-update_google_home_commands();
+];
+//update_google_home_commands();
+updateSoundFilenames();
+
 
 var Sound = require('node-aplay');
 
@@ -260,7 +279,7 @@ Button2.watch(function (err, value) {
     if (value === 1) {
         log('in');
         stopSounds();
-        current_sound = new Sound(SOUND_BASE_URL + command_sounds[0]);
+        current_sound = new Sound(UTILITY_SOUND_BASE_URL + command_sounds[0]);
         current_sound.play();
     }
 });
@@ -275,7 +294,7 @@ Button3.watch(function (err, value) {
     if (value === 1) {
         log('in');
         stopSounds();
-        current_sound = new Sound(SOUND_BASE_URL + command_sounds[1]);
+        current_sound = new Sound(UTILITY_SOUND_BASE_URL + command_sounds[1]);
         current_sound.play();
     }
 });
@@ -289,11 +308,24 @@ Button4.watch(function (err, value) {
     console.log(value);
     if (value === 1) {
         log('in');
-        stopSounds();
-        current_sound = new Sound(SOUND_BASE_URL + command_sounds[2]);
-        current_sound.play();
+        update_google_home_commands();
     }
 });
+/*
+Button4.watch(function (err, value) {
+    log(value);
+    if (err) {
+        console.error('There was an error', err); //output error message to console
+        return;
+    }
+    console.log(value);
+    if (value === 1) {
+        log('in');
+        stopSounds();
+        current_sound = new Sound(UTILITY_SOUND_BASE_URL + command_sounds[2]);
+        current_sound.play();
+    }
+});*/
 
 FishButtonShort.watch(function (err, value) {
     log(value);
