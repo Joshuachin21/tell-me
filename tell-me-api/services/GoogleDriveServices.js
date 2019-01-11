@@ -9,12 +9,12 @@ const Promise = require('bluebird');
 const SCOPES = ['https://www.googleapis.com/auth/drive'];
 const fullAppPath = '/home/pi/REPOs/tell-me/tell-me-api/';
 
-// The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
+// The file token.json stores the user's access and refresh tokens, and is
+const COMMANDS_FOLDER_ID = '1KW-D6PH5IaDdzzw1x4aF4c4ytRVNiiSU';
 const TOKEN_PATH = fullAppPath + 'token.json';
 const CREDENTIALS_PATH = fullAppPath + 'credentials.json';
-const COMMANDS_FOLDER_ID = fullAppPath + '1KW-D6PH5IaDdzzw1x4aF4c4ytRVNiiSU';
 const SOUND_BASE_URL = fullAppPath + 'google_home_commands/';
 const TEMP_SOUND_BASE_URL = fullAppPath + 'tmp_google_home_commands/';
 
