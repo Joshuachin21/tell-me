@@ -63,7 +63,7 @@ function updateCommands() {
             return copyContentsFromFolderToFolder(TEMP_SOUND_BASE_URL, SOUND_BASE_URL);
         })
         .catch((err) => {
-            console.log('ERROR: ' + err)
+            console.log('ERROR: ' + err);
             return Promise.reject(err);
         })
 

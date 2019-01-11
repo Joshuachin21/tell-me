@@ -97,12 +97,14 @@ function updateSoundFilenames() {
 
 function update_google_home_commands() {
     if (CommandsUpdateButtonDebounceDelay) {
+        console.log("Update Debounced. wait 30 sec.");
         return;
     }
     startDebounceTime(CommandsUpdateButtonDebounceDelay, 30000);
     //todo add init sound here
     console.log('updating');
-    return GoogleDriveServices.updateCommands();
+    return GoogleDriveServices.updateCommands()
+        .then(updateSoundFilenames);
 }
 
 function relay_on() {
@@ -164,7 +166,7 @@ let command_sounds = [
     'google_say_abcs.wav'
 ];
 
-updateSoundFilenames();
+update_google_home_commands();
 
 var Sound = require('node-aplay');
 
