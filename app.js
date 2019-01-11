@@ -3,9 +3,11 @@ var fs = require('fs'); //require filesystem module
 var io = require('socket.io')(http); //require socket.io module and pass the http object (server)
 var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
 const HomeCommands = require('./services/HomeCommands.services');
+const GoogleDriveServices = require('./services/GoogleDriveServices');
 const CONFIG = require('./config');
-const SOUND_BASE_URL = '/home/pi/Music/google_home_commands/';
-const SONG_BASE_URL = '/home/pi/Music/songs/';
+const SOUND_BASE_URL = './google_home_commands/';
+const UTILITY_SOUND_BASE_URL = './google_home_utility_commands/';
+const SONG_BASE_URL = './songs/';
 /*
 * logger
 *
@@ -23,9 +25,18 @@ function log(data) {
 * INIT GPIOs
 *
 */
+var CommandsUpdateButton = new Gpio(21, 'in', 'rising', {
+    debounceTimeout: 250
+});
+
+let CommandsUpdateButtonDebounceDelay = false;
+
+
 var Button1 = new Gpio(23, 'in', 'rising', {
     debounceTimeout: 250
 });
+
+let Button1DebounceDelay = false;
 
 var Button2 = new Gpio(17, 'in', 'rising', {
     debounceTimeout: 250
@@ -53,11 +64,11 @@ let FishRelayState = false;
 
 let FishDebounceDelay = false;
 
-const startDebounceTime = () => {
-    FishDebounceDelay = true;
+const startDebounceTime = (delayVar, delayTime) => {
+    delayVar = true;
     setTimeout(() => {
-        FishDebounceDelay = false;
-    }, 500);
+        delayVar = false;
+    }, delayTime);
 };
 
 
@@ -73,12 +84,32 @@ var Button3 = new Gpio(23, 'in', 'rising', {
 *
 */
 
+function updateSoundFilenames() {
+    return GoogleDriveServices.listFilesInLocalFolder(SOUND_BASE_URL)
+        .then((list) => {
+            sounds = list;
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+}
+
+
+function update_google_home_commands() {
+    if (CommandsUpdateButtonDebounceDelay) {
+        return;
+    }
+    startDebounceTime(CommandsUpdateButtonDebounceDelay, 30000);
+    //todo add init sound here
+    console.log('updating');
+    return GoogleDriveServices.updateCommands();
+}
 
 function relay_on() {
     if (FishDebounceDelay) {
         return;
     }
-    startDebounceTime();
+    startDebounceTime(FishDebounceDelay, 500);
     FishRelayState = true;
     FishRelay = new Gpio(6, 'out');
     FishRelay.writeSync(1);
@@ -89,7 +120,7 @@ function relay_off(gpio) {
     if (FishDebounceDelay) {
         return;
     }
-    startDebounceTime();
+    startDebounceTime(FishDebounceDelay, 500);
     FishRelayState = false;
     gpio.writeSync(0);
     gpio.unexport();
@@ -125,23 +156,19 @@ http.listen(8080);
 // With full options
 
 
-const sounds = [
-    //'google_choochoo_livingroom_home.wav',
-    'google_itsy_bitsy.wav',
-    'jesus_loves_me.wav',
-    'listener_kids.wav',
-    'google_old_mcdonald.wav'
-];
+let sounds = [];
 
-const command_sounds = [
+let command_sounds = [
     'google_next.wav',
     'google_stop.wav',
     'google_say_abcs.wav'
 ];
 
+updateSoundFilenames();
+
 var Sound = require('node-aplay');
 
-let current_sound = new Sound(SOUND_BASE_URL + 'google_stop.wav');
+let current_sound = null;
 
 var iterator = 0;
 var last_iterator = null;
@@ -178,6 +205,9 @@ function iterate() {
 }
 
 function stopSounds() {
+    if (!current_sound) {
+        return;
+    }
     try {
         log(current_sound);
         current_sound.stop();
@@ -187,6 +217,19 @@ function stopSounds() {
         log(err);
     }
 }
+
+CommandsUpdateButton.watch(function (err, value) {
+    log(value);
+    console.log('CommandsUpdateButton value: ' + value);
+    if (err) {
+        console.error('There was an error', err); //output error message to console
+        return;
+    }
+
+    if (value === 0) {
+        update_google_home_commands();
+    }
+});
 
 Button1.watch(function (err, value) {
     log(value);
@@ -261,15 +304,15 @@ FishButtonShort.watch(function (err, value) {
         if (FishRelayState) {
             relay_off(FishRelay);
             relay_on();
-            setTimeout(()=>{
+            setTimeout(() => {
                 relay_off(FishRelay);
-            }, 1000);
+            }, 500);
         }
-        else{
+        else {
             relay_on();
-            setTimeout(()=>{
+            setTimeout(() => {
                 relay_off(FishRelay);
-            }, 1000);
+            }, 500);
         }
     }
 });

@@ -11,7 +11,10 @@
     "url": "git+https://github.com/Joshuachin21/tell-me.git"
   },
   "dependencies": {
+    "bluebird": "^3.5.3",
     "fs": "0.0.1-security",
+    "fs-extra": "^7.0.1",
+    "googleapis": "^27.0.0",
     "http": "0.0.0",
     "node-aplay": "^1.0.3",
     "onoff": "^1.1.8",

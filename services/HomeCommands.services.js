@@ -13,9 +13,6 @@ class HomeCommands{
         console.log(this.name);
     }
 
-
-
-
 }
 
 module.exports = HomeCommands;
