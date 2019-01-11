@@ -11,9 +11,9 @@ var https = require('https');
 var fs = require('fs');
 
 
-var key = fs.readFileSync('/home/pi/private.key');
-var cert = fs.readFileSync( '/home/pi/primary.crt' );
-var ca = fs.readFileSync( '/home/pi/intermediate.crt' );
+var key = fs.readFileSync('/home/pi/server.key');
+var cert = fs.readFileSync( '/home/pi/server.crt' );
+//var ca = fs.readFileSync( '/home/pi/intermediate.crt' );
 
 var options = {
     key: key,
