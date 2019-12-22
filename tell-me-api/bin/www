@@ -11,8 +11,8 @@ var https = require('https');
 var fs = require('fs');
 
 
-var key = fs.readFileSync('/home/pi/server.key');
-var cert = fs.readFileSync( '/home/pi/server.crt' );
+var key = "";//fs.readFileSync('/home/pi/server.key');
+var cert = '';//fs.readFileSync( '/home/pi/server.crt' );
 //var ca = fs.readFileSync( '/home/pi/intermediate.crt' );
 
 var options = {
@@ -66,7 +66,7 @@ function normalizePort(val) {
 
 function onError(error) {
 console.log('error');
-console.log(error); 
+console.log(error);
  if (error.syscall !== 'listen') {
     throw error;
   }
@@ -94,11 +94,11 @@ console.log(error);
  * Event listener for HTTP server "listening" event.
  */
 
-function onListening(){  
+function onListening(){
  var addr = server.address();
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
-console.log(bind);
+  console.log('Listening on ' + bind);
 }
