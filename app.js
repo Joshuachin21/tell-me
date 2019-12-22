@@ -176,7 +176,7 @@ http.listen(8080);
 let sounds = [];
 
 let command_sounds = [
-    'google_next.wav',
+    'next.wav',
     'google_stop.wav',
     'google_say_abcs.wav',
     'downloading_commands_now.wav',
@@ -261,7 +261,7 @@ Button1.watch(function (err, value) {
         return;
     }
 
-    if (value === 0) {
+    if (true) {
         log('in');
         stopSounds();
         current_sound = new Sound(SOUND_BASE_URL + sounds[iterator]);
@@ -277,7 +277,7 @@ Button2.watch(function (err, value) {
         return;
     }
     console.log(value);
-    if (value === 1) {
+    if (true) {
         log('in');
         stopSounds();
         current_sound = new Sound(UTILITY_SOUND_BASE_URL + command_sounds[0]);

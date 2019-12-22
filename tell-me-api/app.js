@@ -10,6 +10,7 @@ var usersRouter = require('./routes/users');
 var uploadRouter = require('./routes/upload');
 
 var app = express();
+try{
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -20,5 +21,9 @@ app.use(fileUpload());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/upload', uploadRouter);
-
+console.log('finished init');
+}
+catch(e){
+console.log(e);
+}
 module.exports = app;

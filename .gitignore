@@ -1,3 +1,6 @@
 node_modules
 credentials.json
 token.json
+google_home_commands
+google_home_utility_commands
+tmp_google_home_commands
