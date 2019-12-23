@@ -3,7 +3,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var fileUpload = require('express-fileupload');
-var https = require('express-fileupload');
+var https = require('https');
 var fs = require('fs');
 
 var indexRouter = require('./routes/index');
@@ -18,7 +18,6 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUpload());
-console.log('use inddexrouter');
 app.use('/', indexRouter);
 //app.use('/users', usersRouter);
 app.use('/upload', uploadRouter);
