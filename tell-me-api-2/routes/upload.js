@@ -7,7 +7,8 @@ var router = express.Router();
 router.post('/audio', function (req, res, next) {
     console.log(req.files.foo.name);
     console.log(req.files.foo.mimetype);
-    let filePath = './tmp/';
+    console.log('test updload?');
+    let filePath = '../google_home_commands/';
     let fileName = req.files.foo.name;
     let fileLocation = filePath + fileName;
     downloadFile(req.files.foo.data, fileLocation);

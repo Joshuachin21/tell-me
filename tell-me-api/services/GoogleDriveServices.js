@@ -40,7 +40,6 @@ function listFolderTest() {
     });
 }
 
-
 function updateCommands() {
     let auth = null;
 

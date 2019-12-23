@@ -6,6 +6,7 @@
     <script src="./lib/bootstrap3.min.js"></script>
     <script src="./lib/MediaStreamRecorder.js"></script>
     <script src="./lib/webrtcadapter-latest.js"></script>
+    <link rel="stylesheet" href="./lib/webrtc-css.css">
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
@@ -41,19 +42,7 @@
 
 <script>
     var app = angular.module("myShoppingList", []);
-    app.controller("myCtrl", function ($scope, $http) {
-
-        $scope.init = () => {
-            $scope.getSounds();
-        };
-
-        $scope.getSounds = () => {
-            $http.get("sounds")
-                .then(function (response) {
-                    console.log(response);
-                    $scope.sounds = response.data;
-                });
-        };
+    app.controller("myCtrl", function ($scope) {
         $scope.products = ["Milk", "Bread", "Cheese"];
         $scope.addItem = function () {
             $scope.errortext = "";
@@ -65,21 +54,25 @@
             } else {
                 $scope.errortext = "The item is already in your shopping list.";
             }
-        };
-        $scope.deleteSound = function (fileName) {
-            $http.delete("sounds/" + fileName)
-                .then(function (response) {
-                    console.log(response);
-                    alert('sound deleted');
-                    $scope.getSounds();
-                })
-                .catch((err) => {
-                    console.log(err);
-                    $scope.getSounds();
-                });
+        }
+        $scope.removeItem = function (x) {
+            $scope.errortext = "";
+            $scope.products.splice(x, 1);
         }
     });
 </script>
+
+<div ng-app="myShoppingList" ng-controller="myCtrl">
+    <ul>
+        <li ng-repeat="x in products">{{x}}<span ng-click="removeItem($index)">×</span></li>
+    </ul>
+    <input ng-model="addMe">
+    <button ng-click="addItem()">Add</button>
+    <p>{{errortext}}</p>
+</div>
+
+<p>Try to add the same item twice, and you will get an error message.</p>
+
 
 
 <article>
@@ -110,36 +103,8 @@
 
     <script src="javascripts/scripts.js"></script>
 
-    <script src="./lib/commits.js" async></script>
+    <script src="https://cdn.webrtc-experiment.com/commits.js" async></script>
 </article>
 
-<h2>Sounds List</h2>
-<div ng-app="myShoppingList" ng-controller="myCtrl" ng-init="init()">
-    <div class="row">
-        <div class="panel panel-default col-xs-12">
-            <!-- Default panel contents -->
-            <div class="panel-heading">Panel heading</div>
-
-            <!-- Table -->
-            <table class="table">
-                <tr>
-                    <th width="10%">#</th>
-                    <th width="60%">FileName</th>
-                    <th width="30%">Controls</th>
-                </tr>
-                <tr ng-repeat="x in sounds track by $index">
-                    <td width="10%">{{$index + 1}}</td>
-                    <td width="60%">{{x}}</td>
-                    <td width="30%">
-                        <button ng-click="deleteSound(x)" type="button" class="btn btn-danger dropdown-toggle"
-                                data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">DELETE
-                        </button>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-</div>
 </body>
 </html>
