@@ -26,6 +26,6 @@ app.use('/upload', uploadRouter);
 https.createServer({
     key: fs.readFileSync('./key.pem'),
     cert: fs.readFileSync('./cert.pem'),
-    passphrase: 'YOUR PASSPHRASE HERE'
+    passphrase: 'obiwankenobi'
 }, app)
     .listen(3005);

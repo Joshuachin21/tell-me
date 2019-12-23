@@ -76,6 +76,7 @@
                 throw 'WebAudio not supported!';
             }
             audioNode.connect(audioCtx.destination);
+console.log(navigator);
             navigator.mediaDevices.getUserMedia(mediaConstraints).then(successCallback).catch(errorCallback);
         }
 
