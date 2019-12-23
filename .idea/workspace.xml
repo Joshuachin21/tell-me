@@ -2,19 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="519f4685-e984-42aa-ad43-6906cede1fd4" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/tell-me-api-2/public/javascripts/scripts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tell-me-api-2/public/lib/MediaStreamRecorder.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tell-me-api-2/public/lib/angular.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tell-me-api-2/public/lib/bootstrap3.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tell-me-api-2/public/lib/commits.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tell-me-api-2/public/lib/webrtcadapter-latest.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tell-me-api-2/public/sounds.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tell-me-api-2/routes/sounds.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tell-me-api-2/public/lib/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tell-me-api-2/public/lib/bootstrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tell-me-api-2/public/lib/bootstrap2.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tell-me-api-2/public/lib/jquery3.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tell-me-api-2/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tell-me-api-2/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tell-me-api-2/routes/upload.js" beforeDir="false" afterPath="$PROJECT_DIR$/tell-me-api-2/routes/upload.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tell-me-api-2/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/tell-me-api-2/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tell-me-api/services/GoogleDriveServices.js" beforeDir="false" afterPath="$PROJECT_DIR$/tell-me-api/services/GoogleDriveServices.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -40,10 +33,10 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="commits" value="1" />
-          <entry key="css" value="1" />
+          <entry key="css" value="3" />
           <entry key="gitignore" value="1" />
           <entry key="html" value="8" />
-          <entry key="js" value="43" />
+          <entry key="js" value="47" />
           <entry key="json" value="3" />
           <entry key="ts" value="1" />
           <entry key="www" value="2" />
@@ -51,10 +44,10 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSS" value="1" />
+          <entry key="CSS" value="3" />
           <entry key="HTML" value="8" />
           <entry key="JSON" value="3" />
-          <entry key="JavaScript" value="45" />
+          <entry key="JavaScript" value="49" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="TypeScript" value="1" />
         </counts>
@@ -62,7 +55,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="56" />
-          <entry key="html" value="611" />
+          <entry key="html" value="848" />
           <entry key="js" value="5251" />
           <entry key="json" value="166" />
           <entry key="www" value="72" />
@@ -70,7 +63,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="611" />
+          <entry key="HTML" value="848" />
           <entry key="JSON" value="166" />
           <entry key="JavaScript" value="5323" />
           <entry key="PLAIN_TEXT" value="56" />
@@ -85,20 +78,42 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tell-me-api-2/public/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="77" column="39" selection-start-line="77" selection-start-column="39" selection-end-line="77" selection-end-column="39" />
+            <state relative-caret-position="317">
+              <caret line="160" selection-start-line="160" selection-end-line="160" />
+              <folding>
+                <element signature="e#4945#4952#1" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#section#0;n#article#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tell-me-api-2/routes/sounds.js">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tell-me-api-2/public/javascripts/scripts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="40" column="34" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
+            <state relative-caret-position="471">
+              <caret line="14" column="16" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="16" />
+              <caret line="42" column="21" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="21" />
+              <caret line="48" column="56" selection-start-line="48" selection-start-column="44" selection-end-line="48" selection-end-column="56" />
+              <caret line="59" column="21" selection-start-line="59" selection-start-column="9" selection-end-line="59" selection-end-column="21" />
+              <caret line="65" column="35" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="35" />
+              <caret line="66" column="20" selection-start-line="66" selection-start-column="8" selection-end-line="66" selection-end-column="20" />
+              <caret line="106" column="20" selection-start-line="106" selection-start-column="8" selection-end-line="106" selection-end-column="20" />
+              <folding>
+                <element signature="n#!!block;n#captureUserMedia#0" />
+                <element signature="e#217#293#0" />
+                <element signature="e#335#412#0" />
+                <element signature="e#418#466#0" />
+                <element signature="e#665#684#0" />
+                <element signature="e#752#914#0" />
+                <element signature="n#!!block;n#onMediaError#0" />
+                <element signature="n#!!block;n#bytesToSize#0" />
+                <element signature="n#!!block;n#getTimeLength#0" />
+                <element signature="n#!!block;n#makeXMLHttpRequest#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -115,7 +130,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>gameU</find>
       <find>starting</find>
       <find>player 1</find>
       <find>socket</find>
@@ -145,6 +159,7 @@
       <find>direc</find>
       <find>alert</find>
       <find>100%</find>
+      <find>modal ti</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/tell-me-api</dir>
@@ -193,6 +208,10 @@
         <option value="$PROJECT_DIR$/tell-me-api-2/public/lib/webrtc-css.css" />
         <option value="$PROJECT_DIR$/tell-me-api-2/public/lib/commits.js" />
         <option value="$PROJECT_DIR$/tell-me-api-2/routes/sounds.js" />
+        <option value="$PROJECT_DIR$/tell-me-api-2/public/lib/jquery3.js" />
+        <option value="$PROJECT_DIR$/tell-me-api-2/public/lib/bootstrap.css" />
+        <option value="$PROJECT_DIR$/tell-me-api-2/public/lib/bootstrap2.css" />
+        <option value="$PROJECT_DIR$/tell-me-api-2/public/lib/bootstrap.js" />
         <option value="$PROJECT_DIR$/tell-me-api-2/public/index.html" />
       </list>
     </option>
@@ -255,6 +274,13 @@
               <item name="tell-me" type="462c0819:PsiDirectoryNode" />
               <item name="tell-me-api-2" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tell-me" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tell-me" type="462c0819:PsiDirectoryNode" />
+              <item name="tell-me-api-2" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="javascripts" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tell-me" type="b2602c69:ProjectViewProjectNode" />
@@ -360,7 +386,7 @@
       <workItem from="1546394143203" duration="13985000" />
       <workItem from="1547195800447" duration="4489000" />
       <workItem from="1576911064178" duration="1813000" />
-      <workItem from="1577036961257" duration="11596000" />
+      <workItem from="1577036961257" duration="13430000" />
     </task>
     <task id="LOCAL-00048" summary="angular">
       <created>1511510593629</created>
@@ -709,13 +735,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="114430000" />
+    <option name="totallyTimeSpent" value="116264000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="986" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25738397" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25738397" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -727,7 +753,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.3870246" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.3870246" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32868218" />
       <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="11" />
@@ -968,37 +994,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tell-me-api-2/public/javascripts/scripts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
-          <caret line="159" column="17" selection-start-line="159" selection-start-column="17" selection-end-line="159" selection-end-column="17" />
-          <folding>
-            <element signature="n#!!block;n#captureUserMedia#0" />
-            <element signature="e#217#293#0" />
-            <element signature="e#335#412#0" />
-            <element signature="e#418#466#0" />
-            <element signature="e#665#684#0" />
-            <element signature="e#752#914#0" />
-            <element signature="e#981#1264#0" />
-            <element signature="e#1332#1455#0" />
-            <element signature="e#1521#1723#0" />
-            <element signature="e#1547#1605#0" />
-            <element signature="e#1792#1915#0" />
-            <element signature="n#!!block;n#onMediaSuccess#0" />
-            <element signature="e#2546#2597#0" />
-            <element signature="e#2943#3005#0" />
-            <element signature="e#3238#3358#0" />
-            <element signature="n#!!block;n#onMediaError#0" />
-            <element signature="n#!!block;n#bytesToSize#0" />
-            <element signature="n#!!block;n#getTimeLength#0" />
-            <element signature="e#4526#4594#0" />
-            <element signature="n#!!block;n#makeXMLHttpRequest#0" />
-            <element signature="e#5335#5440#0" />
-            <element signature="e#5399#5434#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tell-me-api/services/GoogleDriveServices.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -1076,15 +1071,78 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tell-me-api-2/routes/sounds.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
+        <state relative-caret-position="600">
           <caret line="40" column="34" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tell-me-api-2/public/lib/jquery3.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="88059" selection-start-line="1" selection-start-column="88059" selection-end-line="1" selection-end-column="88059" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tell-me-api-2/public/lib/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="45" selection-start-line="5" selection-start-column="45" selection-end-line="5" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tell-me-api-2/public/lib/bootstrap2.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="51" selection-start-line="5" selection-start-column="51" selection-end-line="5" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tell-me-api-2/public/lib/bootstrap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="39553" selection-start-line="5" selection-start-column="39553" selection-end-line="5" selection-end-column="39553" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tell-me-api-2/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="77" column="39" selection-start-line="77" selection-start-column="39" selection-end-line="77" selection-end-column="39" />
+        <state relative-caret-position="317">
+          <caret line="160" selection-start-line="160" selection-end-line="160" />
+          <folding>
+            <element signature="e#4945#4952#1" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#section#0;n#article#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tell-me-api-2/public/javascripts/scripts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="471">
+          <caret line="14" column="16" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="16" />
+          <caret line="42" column="21" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="21" />
+          <caret line="48" column="56" selection-start-line="48" selection-start-column="44" selection-end-line="48" selection-end-column="56" />
+          <caret line="59" column="21" selection-start-line="59" selection-start-column="9" selection-end-line="59" selection-end-column="21" />
+          <caret line="65" column="35" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="35" />
+          <caret line="66" column="20" selection-start-line="66" selection-start-column="8" selection-end-line="66" selection-end-column="20" />
+          <caret line="106" column="20" selection-start-line="106" selection-start-column="8" selection-end-line="106" selection-end-column="20" />
+          <folding>
+            <element signature="n#!!block;n#captureUserMedia#0" />
+            <element signature="e#217#293#0" />
+            <element signature="e#335#412#0" />
+            <element signature="e#418#466#0" />
+            <element signature="e#665#684#0" />
+            <element signature="e#752#914#0" />
+            <element signature="n#!!block;n#onMediaError#0" />
+            <element signature="n#!!block;n#bytesToSize#0" />
+            <element signature="n#!!block;n#getTimeLength#0" />
+            <element signature="n#!!block;n#makeXMLHttpRequest#0" />
+          </folding>
         </state>
       </provider>
     </entry>
