@@ -3,7 +3,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var fileUpload = require('express-fileupload');
-
+var https = require('express-fileupload');
+var fs = require('fs');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -22,4 +23,9 @@ app.use('/', indexRouter);
 //app.use('/users', usersRouter);
 app.use('/upload', uploadRouter);
 
-app.listen(3005);
+https.createServer({
+    key: fs.readFileSync('./key.pem'),
+    cert: fs.readFileSync('./cert.pem'),
+    passphrase: 'YOUR PASSPHRASE HERE'
+}, app)
+    .listen(3005);
