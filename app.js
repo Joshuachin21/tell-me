@@ -113,10 +113,10 @@ function update_google_home_commands() {
     console.log('updating');
     return GoogleDriveServices.updateCommands()
         .then(updateSoundFilenames)
-        .then(()=>{
+        .then(() => {
             playSound(UTILITY_SOUND_BASE_URL + command_sounds[4]);
         })
-        .catch((e)=>{
+        .catch((e) => {
             console.log(e);
             playSound(UTILITY_SOUND_BASE_URL + command_sounds[5]);
         });
@@ -185,6 +185,8 @@ let command_sounds = [
 
 ];
 //update_google_home_commands();
+
+let fileUpdateCounter = 0;
 updateSoundFilenames();
 
 
@@ -267,6 +269,13 @@ Button1.watch(function (err, value) {
         current_sound = new Sound(SOUND_BASE_URL + sounds[iterator]);
         current_sound.play();
         iterate();
+    }
+
+    fileUpdateCounter = fileUpdateCounter + 1;
+    if (fileUpdateCounter > 5) {
+        console.log('updating file names');
+        updateSoundFilenames();
+        fileUpdateCounter = 0;
     }
 });
 
