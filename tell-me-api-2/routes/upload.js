@@ -8,7 +8,7 @@ router.post('/audio', function (req, res, next) {
     console.log(req.files.foo.name);
     console.log(req.files.foo.mimetype);
     console.log('test updload?');
-    let filePath = '../google_home_commands/';
+    let filePath = '/home/pi/REPOs/tell-me/google_home_commands/';
     let fileName = req.files.foo.name;
     let fileLocation = filePath + fileName;
     downloadFile(req.files.foo.data, fileLocation);
@@ -21,7 +21,10 @@ function downloadFile(fileBuffer, fileName) {
         if (err) throw err;
 
         console.log("The file was succesfully saved!");
-    });
+ fs.chmod(fileName, 0666, (error) => {
+                        console.log('Changed file permissions');
+                    });   
+ });
 }
 
 

@@ -4,7 +4,7 @@ var fs = require('fs');
 const ms = require('mediaserver');
 var router = express.Router();
 //var GoogleDriveServices = require('../services/GoogleDriveServices');
-const SOUND_BASE_URL = '../google_home_commands/';
+const SOUND_BASE_URL = '/home/pi/REPOs/tell-me/google_home_commands/';
 /* GET users listing. */
 router.get('/', function (req, res, next) {
     return listFilesInLocalFolder().then(response => {

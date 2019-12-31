@@ -25,8 +25,8 @@ app.use('/upload', uploadRouter);
 app.use('/sounds', soundsRouter);
 
 https.createServer({
-    key: fs.readFileSync('./key.pem'),
-    cert: fs.readFileSync('./cert.pem'),
+    key: fs.readFileSync('/home/pi/REPOs/tell-me/tell-me-api-2/key.pem'),
+    cert: fs.readFileSync('/home/pi/REPOs/tell-me/tell-me-api-2/cert.pem'),
     passphrase: 'obiwankenobi'
 }, app)
     .listen(3005);
