@@ -19,6 +19,28 @@
 
 
     <style>
+        body {
+
+            color: #ffffff;
+            background-image: url(images/ts_bg.jpg);
+            background-size: cover; /* <------ */
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+
+            /* optional, center the image */
+        }
+
+        body {
+            background-color: unset;
+        }
+
+        .panel-default > .panel-heading, .panel {
+            background-color: unset;
+            border-color: unset !important;
+            background-image: unset;
+
+        }
+
         input {
             border: 1px solid rgb(46, 189, 235);
             border-radius: 3px;
@@ -36,6 +58,21 @@
             height: auto;
             font-size: inherit;
             margin: 0;
+        }
+
+        .modal {
+            color: #333333;
+        }
+
+        .panel-heading, .table {
+            background: rgba(255, 246, 254, 0.8) !important; /* Green background with 30% opacity */
+
+            color: rgb(51, 51, 51);
+        }
+
+        .add-btn-wrapper {
+            text-align: center;
+            padding: 15px;
         }
     </style>
 </head>
@@ -70,6 +107,12 @@
             }
         };
         $scope.deleteSound = function (fileName) {
+            const conf = confirm("Do you want to delete " + fileName + "?");
+            if (!conf) {
+                console.log("false conf");
+                return;
+            }
+            console.log('in');
             $http.delete("sounds/" + fileName)
                 .then(function (response) {
                     console.log(response);
@@ -80,14 +123,25 @@
                     console.log(err);
                     $scope.getSounds();
                 });
+            console.log('in2');
+        };
+        $scope.playSound = function (fileName) {
+
+            var audio = new Audio("sounds/" + fileName);
+            audio.play();
+
+
         }
     });
 </script>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-    + Add Sound
-</button>
-<h2>Sounds List</h2>
+<div class="add-btn-wrapper">
+
+    <button type="button" class="btn btn-success btn-lg add-btn" data-toggle="modal" data-target="#myModal">
+        + Add Sound
+    </button>
+</div>
+<h2>Adam's Music Box</h2>
 <div ng-app="myShoppingList" ng-controller="myCtrl" ng-init="init()">
     <div class="row">
         <div class="panel panel-default col-xs-12">
@@ -98,14 +152,14 @@
             <table class="table">
                 <tr>
                     <th width="10%">#</th>
-                    <th width="60%">FileName</th>
-                    <th width="30%">Controls</th>
+                    <th width="50%">FileName</th>
+                    <th width="40%" style="text-align: right;">Controls</th>
                 </tr>
                 <tr ng-repeat="x in sounds track by $index">
                     <td width="10%">{{$index + 1}}</td>
-                    <td width="60%">{{x}}</td>
-                    <td width="30%">
-                        <button ng-click="deleteSound(x)" type="button" class="btn btn-success dropdown-toggle"
+                    <td width="50%">{{x}}</td>
+                    <td width="40%" style="text-align: right;">
+                        <button ng-click="playSound(x)" type="button" class="btn btn-success dropdown-toggle"
                                 data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">PLAY
                         </button>
@@ -118,7 +172,6 @@
             </table>
         </div>
     </div>
-
 
 
     <!-- Modal -->
@@ -147,16 +200,12 @@
                             <br>
 
 
-
                             <button id="start-recording">Start</button>
                             <button id="stop-recording" disabled>Stop</button>
                             <button id="play-recording" disabled>PLAY</button>
                             <button id="pause-recording" disabled>Pause</button>
                             <button id="resume-recording" disabled>Resume</button>
                             <button id="save-recording" disabled>Save</button>
-
-
-
 
 
                         </section>
@@ -172,7 +221,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>

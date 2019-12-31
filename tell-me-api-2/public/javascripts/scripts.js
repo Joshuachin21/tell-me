@@ -56,14 +56,18 @@ document.querySelector('#resume-recording').onclick = function () {
     document.querySelector('#pause-recording').disabled = false;
 };
 document.querySelector('#save-recording').onclick = function () {
+    let name = document.getElementById('soundName').value;
+    if (!name) {
+        alert('Missing name, please name your sound!');
+        return;
+    }
     this.disabled = true;
     if (!recordedBlob) {
         alert('nothing recorded');
         return;
     }
-    try{
-
-        uploadToServer(recordedBlob);
+    try {
+        uploadToServer(recordedBlob, name);
         recordedBlob = null;
         audiosContainer.innerHTML = '';
 
@@ -71,6 +75,9 @@ document.querySelector('#save-recording').onclick = function () {
     catch (e) {
         alert(e);
     }
+    document.getElementById('soundName').value = '';
+    $('#myModal').modal('hide');
+    location.reload();
     //mediaRecorder.save();
 
     // alert('Drop WebM file on Chrome or Firefox. Both can play entire file. VLC player or other players may not work.');
@@ -148,8 +155,8 @@ window.onbeforeunload = function () {
 };
 
 
-function uploadToServer(blob) {
-    var file = new File([blob], `recording.${Date.now()}.wav`, {
+function uploadToServer(blob, name) {
+    var file = new File([blob], `${name ? name : 'recording'}.${Date.now()}.wav`, {
         type: 'audio/wav'
     });
 
@@ -158,7 +165,7 @@ function uploadToServer(blob) {
     formData.append('foo', file);
 
     makeXMLHttpRequest('/upload/audio', formData, function (err) {
-        if(err){
+        if (err) {
             console.log(err);
             alert(err);
             return;
