@@ -30,3 +30,5 @@ https.createServer({
     passphrase: 'obiwankenobi'
 }, app)
     .listen(3005);
+console.log('listening on 3005');
+

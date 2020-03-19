@@ -176,7 +176,7 @@ http.listen(8080);
 let sounds = [];
 
 let command_sounds = [
-    'next.wav',
+    'google_next.wav',
     'google_stop.wav',
     'google_say_abcs.wav',
     'downloading_commands_now.wav',
@@ -258,6 +258,7 @@ CommandsUpdateButton.watch(function (err, value) {
 Button1.watch(function (err, value) {
     log(value);
     console.log(value);
+console.log('Button1');
     if (err) {
         console.error('There was an error', err); //output error message to console
         return;
@@ -281,12 +282,13 @@ Button1.watch(function (err, value) {
 
 Button2.watch(function (err, value) {
     log(value);
+console.log('Button2');
     if (err) {
         console.error('There was an error', err); //output error message to console
         return;
     }
     console.log(value);
-    if (true) {
+    if (false) {
         log('in');
         stopSounds();
         current_sound = new Sound(UTILITY_SOUND_BASE_URL + command_sounds[0]);
@@ -296,12 +298,13 @@ Button2.watch(function (err, value) {
 
 Button3.watch(function (err, value) {
     log(value);
+console.log('Button3');
     if (err) {
         console.error('There was an error', err); //output error message to console
         return;
     }
     console.log(value);
-    if (value === 1) {
+    if (false) {
         log('in');
         stopSounds();
         current_sound = new Sound(UTILITY_SOUND_BASE_URL + command_sounds[1]);
@@ -311,6 +314,7 @@ Button3.watch(function (err, value) {
 
 Button4.watch(function (err, value) {
     log(value);
+console.log('Button4');
     if (err) {
         console.error('There was an error', err); //output error message to console
         return;
@@ -318,7 +322,7 @@ Button4.watch(function (err, value) {
     console.log(value);
     if (value === 1) {
         log('in');
-        update_google_home_commands();
+//        update_google_home_commands();
     }
 });
 /*
@@ -339,6 +343,7 @@ Button4.watch(function (err, value) {
 
 FishButtonShort.watch(function (err, value) {
     log(value);
+console.log('fish button short');
     if (err) {
         console.error('There was an error', err); //output error message to console
         return;
@@ -363,6 +368,7 @@ FishButtonShort.watch(function (err, value) {
 
 FishButtonLong.watch(function (err, value) {
     log(value);
+console.log('fish button long');
     if (err) {
         console.error('There was an error', err); //output error message to console
         return;
