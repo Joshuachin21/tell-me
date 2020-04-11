@@ -60,10 +60,12 @@ let FishButtonShort = new Gpio(25, 'in', 'rising', {
 });
 
 let FishRelay = null;
+
 let FishRelayState = false;
 
-
 let FishDebounceDelay = false;
+
+let FishTimeout = null;
 
 const startDebounceTime = (delayVar, delayTime) => {
     delayVar = true;
@@ -72,13 +74,7 @@ const startDebounceTime = (delayVar, delayTime) => {
     }, delayTime);
 };
 
-
-/*
-
-var Button3 = new Gpio(23, 'in', 'rising', {
-    debounceTimeout: 50
-});*/
-
+let fishDebounce
 
 /*
 * INIT Sounds
@@ -325,21 +321,6 @@ console.log('Button4');
 //        update_google_home_commands();
     }
 });
-/*
-Button4.watch(function (err, value) {
-    log(value);
-    if (err) {
-        console.error('There was an error', err); //output error message to console
-        return;
-    }
-    console.log(value);
-    if (value === 1) {
-        log('in');
-        stopSounds();
-        current_sound = new Sound(UTILITY_SOUND_BASE_URL + command_sounds[2]);
-        current_sound.play();
-    }
-});*/
 
 FishButtonShort.watch(function (err, value) {
     log(value);
@@ -350,19 +331,11 @@ console.log('fish button short');
     }
     console.log(value);
     if (value === 1) {
-        if (FishRelayState) {
+        clearTimeout(FishTimeout);
+        relay_on();
+        FishTimeout = setTimeout(() => {
             relay_off(FishRelay);
-            relay_on();
-            setTimeout(() => {
-                relay_off(FishRelay);
-            }, 1200);
-        }
-        else {
-            relay_on();
-            setTimeout(() => {
-                relay_off(FishRelay);
-            }, 1200);
-        }
+        }, 1200);
     }
 });
 
