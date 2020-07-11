@@ -26,6 +26,9 @@ function log(data) {
 * INIT GPIOs
 *
 */
+
+var FishRelay = new Gpio(6, 'high');
+
 var CommandsUpdateButton = new Gpio(21, 'in', 'rising', {
     debounceTimeout: 250
 });
@@ -58,8 +61,6 @@ let FishButtonLong = new Gpio(24, 'in', 'rising', {
 let FishButtonShort = new Gpio(25, 'in', 'rising', {
     debounceTimeout: 250
 });
-
-let FishRelay = null;
 
 let FishRelayState = false;
 
@@ -119,13 +120,14 @@ function update_google_home_commands() {
 }
 
 function relay_on() {
+console.log('relay_on');
     if (FishDebounceDelay) {
+console.log('fishrelay debounced');
         return;
     }
     startDebounceTime(FishDebounceDelay, 500);
-    FishRelayState = true;
-    FishRelay = new Gpio(6, 'out');
-    FishRelay.writeSync(1);
+    FishRelayState = true
+    FishRelay.writeSync(0);
     console.log('relay on');
 }
 
@@ -135,13 +137,17 @@ function relay_off(gpio) {
     }
     startDebounceTime(FishDebounceDelay, 500);
     FishRelayState = false;
-    gpio.writeSync(0);
-    gpio.unexport();
-
+    FishRelay.writeSync(1);
     console.log('relay off');
 
 }
+setInterval(()=>{
+if(FishRelayState){
 
+relay_off();
+}
+else{relay_on();}
+},1000);
 function read_status(gpio) {
     if (!gpio) {
         return 0;
@@ -346,13 +352,16 @@ console.log('fish button long');
         console.error('There was an error', err); //output error message to console
         return;
     }
-    console.log(value);
+    console.log('value', value);
     if (value === 1) {
+console.log('FishRelayState', FishRelayState);
         if (FishRelayState) {
+console.log('FishRelay off', FishRelay);
             relay_off(FishRelay);
         }
 
         else {
+console.log('relay on');
             relay_on();
         }
     }
@@ -375,5 +384,6 @@ process.on('SIGINT', function () { //on ctrl+c
     Button4.unexport();
     FishButtonLong.unexport();
     FishButtonShort.unexport();
+FishRelay.unexport();
     process.exit(); //exit completely
 });
